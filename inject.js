@@ -2,6 +2,7 @@
   'use strict';
 
   var GALLERY_URL        = 'https://skylineip.s3.sa-east-1.amazonaws.com/Tour+Virtual/teriva/galeria-la-vie-dor/index.html';
+  var PLANTAS_URL        = 'https://skylineip.s3.sa-east-1.amazonaws.com/Tour+Virtual/teriva/galeria-la-vie-dor/plantas.html';
   var VIDEO_GALLERY_URL  = 'https://skylineip.s3.sa-east-1.amazonaws.com/Tour+Virtual/teriva/galeria-la-vie-dor/video-gallery.html';
 
   var overlay    = null;
@@ -60,6 +61,12 @@
   // GaleriaImagens(0) → fecha
   w.GaleriaImagens = function (show) {
     if (show === 1) _open(GALLERY_URL + '?v=' + Date.now(), 'fullscreen'); else _close();
+  };
+
+  // GaleriaPlantas(1) → abre as plantas em tela cheia (menu central alterna entre elas)
+  // GaleriaPlantas(0) → fecha
+  w.GaleriaPlantas = function (show) {
+    if (show === 1) _open(PLANTAS_URL + '?v=' + Date.now(), 'fullscreen'); else _close();
   };
 
   // AbrirGaleriaVideos(1) → abre galeria de vídeos (versão PC ou mobile conforme o dispositivo)

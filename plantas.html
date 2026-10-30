@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plantas — La Vie d'Or</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:   #593B31;
+      --dark: #F2EBDD;
+      --border: rgba(242,235,221,0.12);
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --glide: cubic-bezier(0.65, 0, 0.25, 1);
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--dark);
+      font-family: var(--font-sans);
+    }
+
+    #pl-root { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+
+    /* ── HEADER: logo | menu centralizado | fechar ── */
+    #pl-header {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      gap: 12px;
+    }
+    #pl-logo { height: 48px; width: auto; display: block; }
+    #btn-close {
+      justify-self: end;
+      width: 45px; height: 45px;
+      border: none; padding: 0; cursor: pointer;
+      background: url(assets/close-normal.png) center/100% 100% no-repeat;
+    }
+    #btn-close:active { background-image: url(assets/close-hover.png); }
+    @media (hover: hover) { #btn-close:hover { background-image: url(assets/close-hover.png); } }
+
+    /* ── MENU SEGMENTADO COM PÍLULA DESLIZANTE ── */
+    #pl-switch {
+      position: relative;
+      display: flex;
+      padding: 5px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(242,235,221,0.16);
+      box-shadow: inset 0 1px 6px rgba(0,0,0,0.25), 0 8px 24px rgba(0,0,0,0.18);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    }
+    #pl-pill {
+      position: absolute;
+      top: 5px; bottom: 5px; left: 0;
+      width: 0;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #FBF6EA 0%, #E9DEC8 100%);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.8);
+      transition: transform 0.55s var(--glide), width 0.55s var(--glide);
+      will-change: transform, width;
+    }
+    #pl-pill.no-anim { transition: none; }
+    .pl-opt {
+      position: relative;
+      z-index: 1;
+      padding: 11px 30px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: rgba(242,235,221,0.7);
+      border-radius: 999px;
+      transition: color 0.4s var(--ease);
+      -webkit-tap-highlight-color: transparent;
+    }
+    @media (hover: hover) { .pl-opt:hover { color: #FFFFFF; } .pl-opt.active:hover { color: var(--bg); } }
+    .pl-opt.active { color: var(--bg); font-weight: 600; }
+    .pl-opt:focus-visible { outline: 2px solid var(--dark); outline-offset: 2px; }
+
+    /* ── IMAGEM EM TELA CHEIA (inteira, sem corte) ── */
+    #pl-stage { position: relative; flex: 1; min-height: 0; }
+    .pl-img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      padding: 20px;
+      object-fit: contain;
+      opacity: 0;
+      transform: scale(0.985);
+      transition: opacity 0.5s var(--ease), transform 0.6s var(--glide);
+      pointer-events: none;
+    }
+    .pl-img.active { opacity: 1; transform: none; }
+
+    @media (max-width: 700px) {
+      #pl-header {
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "logo close" "menu menu";
+        padding: 10px 14px 12px;
+        row-gap: 10px;
+      }
+      #pl-logo { grid-area: logo; height: 36px; }
+      #btn-close { grid-area: close; }
+      #pl-switch { grid-area: menu; justify-self: center; }
+      .pl-opt { padding: 10px 22px; font-size: 11px; }
+      .pl-img { padding: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #pl-pill, .pl-img, .pl-opt { transition-duration: 0.001ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="pl-root">
+  <header id="pl-header">
+    <img id="pl-logo" src="assets/logo.png" alt="La Vie d'Or">
+    <nav id="pl-switch" role="tablist" aria-label="Plantas">
+      <span id="pl-pill"></span>
+    </nav>
+    <button id="btn-close" title="Fechar" aria-label="Fechar"></button>
+  </header>
+
+  <div id="pl-stage"></div>
+</div>
+
+<script>
+// Para adicionar plantas, inclua um item aqui (o menu e a pílula se ajustam sozinhos).
+const PLANTAS = [
+  { label: 'Masterplan',    src: 'assets/plantas/MASTERPLAN.jpg' },
+  { label: 'Fotomontagem',  src: 'assets/plantas/IMA-TERIVA_EUROVILLE-FOTOMONTAGEM-ALTA-R05.jpg' },
+];
+
+const elSwitch = document.getElementById('pl-switch');
+const elPill   = document.getElementById('pl-pill');
+const elStage  = document.getElementById('pl-stage');
+let current = 0;
+
+PLANTAS.forEach((p, i) => {
+  const b = document.createElement('button');
+  b.className = 'pl-opt';
+  b.setAttribute('role', 'tab');
+  b.textContent = p.label;
+  b.addEventListener('click', () => select(i));
+  elSwitch.appendChild(b);
+
+  const img = document.createElement('img');
+  img.className = 'pl-img';
+  img.src = encodeURI(p.src);
+  img.alt = p.label;
+  img.draggable = false;
+  elStage.appendChild(img);
+});
+
+const opts = () => elSwitch.querySelectorAll('.pl-opt');
+const imgs = () => elStage.querySelectorAll('.pl-img');
+
+function movePill(animate) {
+  const b = opts()[current];
+  elPill.classList.toggle('no-anim', !animate);
+  elPill.style.width = b.offsetWidth + 'px';
+  elPill.style.transform = 'translateX(' + b.offsetLeft + 'px)';
+}
+
+function select(i, animate = true) {
+  current = i;
+  opts().forEach((b, k) => { b.classList.toggle('active', k === i); b.setAttribute('aria-selected', k === i); });
+  imgs().forEach((m, k) => m.classList.toggle('active', k === i));
+  movePill(animate);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft'  && current > 0)                select(current - 1);
+  if (e.key === 'ArrowRight' && current < PLANTAS.length - 1) select(current + 1);
+});
+
+window.addEventListener('resize', () => movePill(false));
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => movePill(false));
+select(0, false);
+
+document.getElementById('btn-close').addEventListener('click', () => {
+  if (window.parent !== window) window.parent.postMessage({ action: 'closeGallery' }, '*');
+});
+</script>
+</body>
+</html>

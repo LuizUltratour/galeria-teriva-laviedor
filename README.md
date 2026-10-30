@@ -12,6 +12,7 @@ Galerias de imagens e vídeos para injeção via script no 3DVista, hospedadas n
 | Arquivo | URL |
 |---------|-----|
 | Imagens | `https://skylineip.s3.sa-east-1.amazonaws.com/Tour+Virtual/teriva/galeria-la-vie-dor/index.html` |
+| Plantas |  `https://skylineip.s3.sa-east-1.amazonaws.com/Tour+Virtual/teriva/galeria-la-vie-dor/plantas.html` |
 | Vídeos  | `https://skylineip.s3.sa-east-1.amazonaws.com/Tour+Virtual/teriva/galeria-la-vie-dor/video-gallery.html` |
 | Script  | `https://skylineip.s3.sa-east-1.amazonaws.com/Tour+Virtual/teriva/galeria-la-vie-dor/inject.js` |
 
@@ -74,5 +75,6 @@ O sync não envia `assets/imagens/` (originais).
 
 ```js
 GaleriaImagens(1);     // abre galeria de imagens   (0 fecha)
+GaleriaPlantas(1);     // abre as plantas em tela cheia (0 fecha)
 AbrirGaleriaVideos(1); // abre galeria de vídeos    (0 fecha)
 ```
