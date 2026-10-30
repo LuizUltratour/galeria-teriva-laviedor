@@ -27,9 +27,9 @@ $targets = @(
 $jpgEnc = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq 'image/jpeg' }
 
 $imgs = Get-ChildItem -LiteralPath $assets -Recurse -File |
-        Where-Object { $_.Extension -match '(?i)\.(jpe?g|png)$' -and
+        Where-Object { $_.Extension -match '(?i)\.(jpe?g|png|tiff?)$' -and
                        $_.FullName -notmatch '[\\/](thumbs|large|videos|360|lib)[\\/]' -and
-                       $_.Name -notmatch '^close-' }
+                       $_.Name -notmatch '^(close|proximo|voltar|logo)' }
 
 $made = 0; $skip = 0
 foreach ($f in $imgs) {

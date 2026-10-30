@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galeria — Mori Mori — Miranda de Castro</title>
+  <title>Galeria — La Vie d'Or</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -11,17 +11,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* Mori Mori — Miranda de Castro — tema verde imersivo.
+      /* La Vie d'Or — fundo marrom sólido #593B31 com logo no canto superior esquerdo.
          --bg = fundo marrom (primária) · --dark = foreground claro (secundária) · --accent = secundária usada em destaque/estado ativo */
-      --bg: #325825;             /* marrom principal — cor primária */
-      --surface: #3E6330;        /* superfície de card (marrom +luz) */
-      --surface-2: #4A6E3B;      /* superfície elevada / hover */
+      --bg: #593B31;             /* marrom principal — cor primária */
+      --surface: #6B493D;        /* superfície de card (marrom +luz) */
+      --surface-2: #7A5648;      /* superfície elevada / hover */
       --dark: #F2EBDD;           /* foreground / texto principal — cor secundária */
       --text-soft: rgba(242,235,221,0.62);
       --border: rgba(242,235,221,0.12);
       --border-strong: rgba(242,235,221,0.28);
       --accent: #F2EBDD;         /* claro — destaque / estado ativo */
-      --accent-ink: #325825;     /* texto escuro sobre fundo de destaque claro */
+      --accent-ink: #593B31;     /* texto escuro sobre fundo de destaque claro */
       --accent-soft: rgba(242,235,221,0.14);
       --white: #F2EBDD;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -33,7 +33,7 @@
     html, body {
       height: 100%;
       overflow: hidden;
-      background: var(--bg) url(assets/bg.png) center/cover no-repeat fixed;
+      background: var(--bg);
       color: var(--dark);
       font-family: var(--font-sans);
     }
@@ -50,7 +50,7 @@
     #g-header {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
       padding: 12px 24px;
       border-bottom: 1px solid var(--border);
       flex-shrink: 0;
@@ -105,7 +105,7 @@
     }
     @media (hover: hover) { .f-btn:hover { border-color: var(--accent); background: var(--accent-soft); } }
     .f-btn:active { border-color: var(--accent); background: var(--accent-soft); }
-    .f-btn.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); box-shadow: 0 4px 14px rgba(50,88,37,0.35); }
+    .f-btn.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); box-shadow: 0 4px 14px rgba(89,59,49,0.35); }
     .f-btn:active { transform: scale(0.97); }
 
     /* Sub-filter */
@@ -265,231 +265,11 @@
       transform: scale(0.75);
       transition: opacity 0.25s var(--ease), transform 0.3s var(--spring);
       color: var(--accent-ink);
-      box-shadow: 0 4px 14px rgba(50,88,37,0.45);
+      box-shadow: 0 4px 14px rgba(89,59,49,0.45);
       z-index: 2;
     }
     .g-card.loaded:hover .card-zoom { opacity: 1; transform: scale(1); }
 
-    /* Plant card */
-    .g-card.is-plant { background: #B1904E; }
-    .g-card.is-plant img { object-fit: cover; padding: 0; }
-    .g-card.is-plant::before {
-      background: linear-gradient(
-        90deg,
-        rgba(0,0,0,0.04) 0%,
-        rgba(0,0,0,0.09) 40%,
-        rgba(0,0,0,0.04) 80%
-      );
-      background-size: 800px 100%;
-    }
-
-    /* ── COBERTURA SPECIAL CARD ── */
-    .g-card.cob-card {
-      grid-column: span 2;
-      aspect-ratio: unset;
-      cursor: default;
-      display: flex;
-      flex-direction: column;
-      background: var(--white);
-      color: var(--accent-ink);       /* texto verde-escuro sobre card claro de plantas */
-      border: 1px solid rgba(0,0,0,0.10);
-    }
-    .g-card.cob-card:hover { transform: none; box-shadow: 0 6px 20px rgba(0,0,0,0.28); border-color: rgba(0,0,0,0.10); }
-    .g-card.cob-card::before { display: none; }
-    @media (max-width: 700px) { .g-card.cob-card { grid-column: span 2; } }
-    @media (max-width: 420px) { .g-card.cob-card { grid-column: span 1; } }
-
-    /* ── PLANTAS MODE ── */
-    #g-grid.plantas-mode {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding: 10px;
-    }
-    #g-grid.plantas-mode .g-card.is-plant,
-    #g-grid.plantas-mode .g-card.cob-card {
-      height: 420px;
-    }
-    #g-grid.plantas-mode .g-card.is-plant {
-      height: auto;
-      aspect-ratio: 16 / 9;
-    }
-    #g-grid.plantas-mode .g-card.cob-card {
-      grid-column: span 1;
-    }
-    #g-grid.plantas-mode .cob-body {
-      min-height: 0;
-    }
-    @media (max-width: 700px) {
-      #g-grid.plantas-mode { grid-template-columns: 1fr; gap: 8px; padding: 8px; }
-      #g-grid.plantas-mode .g-card.cob-card { grid-column: span 1; }
-    }
-
-    .cob-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 22px 14px;
-      border-bottom: 1px solid rgba(0,0,0,0.10);
-      flex-shrink: 0;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .cob-badge {
-      display: inline-block;
-      padding: 3px 11px;
-      background: var(--bg);
-      color: var(--dark);
-      font-size: 8.5px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      border-radius: 40px;
-      margin-bottom: 5px;
-    }
-
-    .cob-name {
-      font-family: var(--font-sans);
-      font-size: 16px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-    }
-    .cob-area {
-      font-size: 11px;
-      opacity: 0.4;
-      margin-top: 2px;
-      letter-spacing: 0.04em;
-    }
-    .cob-sub {
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      opacity: 0.45;
-      margin-top: 4px;
-    }
-
-    /* Floor tab switcher */
-    .floor-tabs {
-      display: flex;
-      padding: 3px;
-      border: 1px solid var(--border-strong);
-      border-radius: 40px;
-      background: var(--bg);
-      flex-shrink: 0;
-    }
-    .floor-tab {
-      padding: 5px 16px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      font-family: var(--font-sans);
-      font-size: 10.5px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      color: var(--dark);
-      opacity: 0.55;
-      border-radius: 40px;
-      white-space: nowrap;
-      transition: background 0.22s var(--ease), color 0.22s var(--ease), opacity 0.22s;
-    }
-    .floor-tab.active { background: var(--accent); color: var(--accent-ink); opacity: 1; }
-
-    /* Floor image area */
-    .cob-body {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-      min-height: 280px;
-    }
-    .floor-wrap {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.38s ease;
-    }
-    .floor-wrap.active { opacity: 1; pointer-events: auto; }
-
-    /* skeleton inside cob body */
-    .floor-skeleton {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        90deg,
-        rgba(0,0,0,0.05) 0%,
-        rgba(0,0,0,0.11) 40%,
-        rgba(0,0,0,0.05) 80%
-      );
-      background-size: 800px 100%;
-      animation: shimmer 1.4s infinite linear;
-      transition: opacity 0.3s ease;
-      z-index: 0;
-    }
-    .cob-body.loaded .floor-skeleton { opacity: 0; pointer-events: none; }
-
-    .floor-wrap img {
-      max-width: 100%; max-height: 100%;
-      object-fit: contain;
-      width: 100%; height: 100%;
-      cursor: zoom-in;
-      opacity: 0;
-      transition: opacity 0.35s ease, transform 0.3s ease;
-      position: relative;
-      z-index: 1;
-    }
-    .floor-wrap img.loaded { opacity: 1; }
-    .floor-wrap img:hover { transform: scale(1.015); }
-    .floor-lbl {
-      position: absolute;
-      bottom: 14px; left: 14px;
-      padding: 4px 12px;
-      background: rgba(50,88,37,0.82);
-      color: var(--dark);
-      font-size: 9.5px;
-      font-weight: 500;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      border-radius: 40px;
-    }
-
-    /* Footer */
-    .cob-footer {
-      padding: 11px 22px;
-      border-top: 1px solid rgba(0,0,0,0.10);
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-shrink: 0;
-    }
-    .btn-see-both {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 7px 18px;
-      border: 1px solid rgba(0,0,0,0.22);
-      background: transparent;
-      cursor: pointer;
-      font-family: var(--font-sans);
-      font-size: 10.5px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      color: var(--accent-ink);
-      border-radius: 40px;
-      transition: background 0.22s var(--ease), color 0.22s var(--ease), border-color 0.22s var(--ease);
-    }
-    @media (hover: hover) { .btn-see-both:hover { background: var(--bg); color: var(--dark); border-color: var(--bg); } }
-    .btn-see-both:active { background: var(--bg); color: var(--dark); border-color: var(--bg); }
-    .cob-hint {
-      font-size: 10px;
-      letter-spacing: 0.05em;
-      color: rgba(50,88,37,0.5);
-      text-transform: uppercase;
-    }
 
     /* ── EMPTY STATE ── */
     #g-empty {
@@ -521,7 +301,7 @@
       z-index: 9000;
       display: flex;
       flex-direction: column;
-      background: rgba(50,88,37,0.98);
+      background: rgba(89,59,49,0.98);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
@@ -589,39 +369,6 @@
       display: block;
     }
 
-    /* Dual floor lightbox */
-    #lb-dual {
-      display: none;
-      gap: 24px;
-      width: 100%;
-      height: 100%;
-      align-items: center;
-      justify-content: center;
-    }
-    #lb-dual.show { display: flex; }
-    .dual-col {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      height: 100%;
-      min-width: 0;
-    }
-    .dual-lbl {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(242,235,221,0.5);
-      flex-shrink: 0;
-    }
-    .dual-col img {
-      flex: 1;
-      max-width: 100%;
-      min-height: 0;
-      object-fit: contain;
-    }
 
     /* Nav arrows */
     .lb-nav {
@@ -745,12 +492,6 @@
       /* card text */
       .card-title { font-size: 11.5px; }
 
-      /* cob-card header stacks vertically */
-      .cob-header { flex-direction: column; align-items: flex-start; padding: 14px 16px 10px; gap: 10px; }
-      .cob-name { font-size: 16px; }
-      .cob-body { min-height: 200px; }
-      .cob-footer { padding: 9px 16px; }
-      .btn-see-both { font-size: 10px; padding: 6px 14px; }
 
       /* lightbox */
       #lb-head { padding: 12px 14px; flex-wrap: wrap; gap: 8px; }
@@ -767,9 +508,8 @@
         column-gap: 16px;
         row-gap: 14px;
       }
-      #lb-img, #lb-dual { grid-column: 1 / -1; grid-row: 1; justify-self: center; }
+      #lb-img { grid-column: 1 / -1; grid-row: 1; justify-self: center; }
       #lb-img { max-height: calc(100dvh - 240px); max-width: 100vw; }
-      #lb-dual { height: auto; max-height: calc(100dvh - 240px); overflow-y: auto; }
       #lb-prev, #lb-next {
         position: static;
         transform: none;
@@ -781,11 +521,6 @@
       #lb-prev { grid-column: 1; justify-self: end; }
       #lb-next { grid-column: 2; justify-self: start; }
 
-      /* dual view stacks vertically on mobile */
-      #lb-dual { flex-direction: column; gap: 12px; padding: 12px; }
-      .dual-col { height: auto; flex: none; width: 100%; }
-      .dual-col img { max-height: 35vh; }
-
       #lb-foot { padding: 8px 14px; }
       #lb-notice { font-size: 9.5px; padding: 4px 14px; }
     }
@@ -793,7 +528,6 @@
     /* ── VERY SMALL (≤ 360px) ── */
     @media (max-width: 360px) {
       .f-btn { padding: 5px 10px; font-size: 10px; }
-      .floor-tab { padding: 4px 10px; font-size: 10px; }
     }
 
     /* ── ACESSIBILIDADE / DESEMPENHO: respeitar redução de movimento ── */
@@ -819,21 +553,13 @@
     #lb-close { border:none !important; border-radius:0 !important; width:45px !important; height:45px !important; background:url(assets/close-normal.png) center/100% 100% no-repeat !important; color:transparent; padding:0; backdrop-filter:none; -webkit-backdrop-filter:none; }
     #lb-close:active { background-image:url(assets/close-hover.png) !important; }
     @media (hover: hover) { #lb-close:hover { background:url(assets/close-hover.png) center/100% 100% no-repeat !important; border:none !important; border-radius:0 !important; width:45px !important; height:45px !important; } }
-
-    /* ── Filtros: fonte e pressed/ativo em #B1904E ── */
-    .f-btn, .sf-btn { color: #B1904E; border-color: rgba(177,144,78,0.45); }
-    .sf-btn { opacity: 0.75; }
-    @media (hover: hover) { .f-btn:hover, .sf-btn:hover { border-color: #B1904E; background: rgba(177,144,78,0.14); } }
-    .f-btn:active, .sf-btn:active { background: #B1904E; color: #325825; border-color: #B1904E; }
-    .f-btn.active, .sf-btn.active { background: #B1904E; color: #325825; border-color: #B1904E; box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
-
-    /* ── Botões de filtro: #325825 / texto branco; pressed/ativo invertido; sem cantos arredondados ── */
-    .f-btn, .sf-btn { background: #325825; color: #FFFFFF; border: 1px solid rgba(255,255,255,0.45); border-radius: 0; opacity: 1; }
-    @media (hover: hover) { .f-btn:hover, .sf-btn:hover { background: #325825; color: #FFFFFF; border-color: #FFFFFF; } }
-    .f-btn:active, .sf-btn:active, .f-btn.active, .sf-btn.active { background: #FFFFFF; color: #325825; border-color: #FFFFFF; box-shadow: none; }
+    /* ── Botões de filtro: #593B31 / texto branco; pressed/ativo invertido; sem cantos arredondados ── */
+    .f-btn, .sf-btn { background: #593B31; color: #FFFFFF; border: 1px solid rgba(255,255,255,0.45); border-radius: 0; opacity: 1; }
+    @media (hover: hover) { .f-btn:hover, .sf-btn:hover { background: #593B31; color: #FFFFFF; border-color: #FFFFFF; } }
+    .f-btn:active, .sf-btn:active, .f-btn.active, .sf-btn.active { background: #FFFFFF; color: #593B31; border-color: #FFFFFF; box-shadow: none; }
 
     /* ── Fundo das prévias ── */
-    .g-card { background: #B1904E; }
+    .g-card { background: var(--surface); }
 
     /* ── Setas anterior / próximo (imagens) ── */
     .lb-nav { border: none !important; border-radius:0 !important; width:45px !important; height:45px !important; padding: 0; color: transparent; background-repeat: no-repeat !important; background-position: center !important; background-size: 100% 100% !important; }
@@ -847,6 +573,10 @@
     }
     .lb-nav, .lb-nav:hover, .lb-nav:active { background-color: transparent !important; box-shadow: none !important; }
     .lb-nav:disabled { opacity: 0.18; }
+
+    /* ── Logo no canto superior esquerdo ── */
+    #g-logo { height: 48px; width: auto; display: block; }
+    @media (max-width: 600px) { #g-logo { height: 36px; } }
   </style>
 </head>
 <body>
@@ -855,15 +585,13 @@
 
   <!-- Header -->
   <header id="g-header">
+    <img id="g-logo" src="assets/logo.png" alt="La Vie d'Or">
     <button id="btn-close" title="Fechar galeria" aria-label="Fechar"></button>
   </header>
 
-  <!-- Filters -->
+  <!-- Filters (cada subpasta de imagens é um botão) -->
   <div id="g-filters">
     <div id="filter-main"></div>
-    <div id="filter-sub">
-      <div id="filter-sub-inner"></div>
-    </div>
   </div>
 
   <!-- Gallery -->
@@ -891,16 +619,6 @@
   <div id="lb-body">
     <button id="lb-prev" class="lb-nav" aria-label="Anterior"></button>
     <img id="lb-img" src="" alt="">
-    <div id="lb-dual">
-      <div class="dual-col" id="dc-a">
-        <div class="dual-lbl"></div>
-        <img src="" alt="">
-      </div>
-      <div class="dual-col" id="dc-b">
-        <div class="dual-lbl"></div>
-        <img src="" alt="">
-      </div>
-    </div>
     <button id="lb-next" class="lb-nav" aria-label="Próximo"></button>
   </div>
   <div id="lb-foot">
@@ -916,111 +634,74 @@
 <script>
 // ================================================================
 // CONFIGURAÇÃO DA GALERIA
-// Edite GALLERY_CONFIG.items abaixo para adicionar suas imagens.
-// Coloque os arquivos nas pastas dentro de assets/ e atualize
-// os campos src com os nomes exatos dos arquivos.
+// Cada subpasta de assets/imagens/ é um botão de filtro. Para cada
+// imagem: [nome do arquivo sem extensão, título exibido].
+// Gere thumbs/large com ./generate_thumbs.ps1 (mesmo caminho, .jpg).
 // ================================================================
 const GALLERY_CONFIG = {
-  projectName: 'MORI MORI — MIRANDA DE CASTRO',
-  projectSub:  '',
-
-  categories: [
-    { id: 'fachadas',     label: 'Fachadas' },
-    { id: 'areas-comuns', label: 'Áreas Comuns' },
-    { id: 'apartamento',  label: 'Apartamento Decorado' },
-    {
-      id: 'plantas', label: 'Plantas',
-      subs: [
-        { id: 'pl-apartamentos', label: 'Apartamento' },
-        { id: 'pl-implantacao',  label: 'Implantação' },
-      ]
-    },
-  ],
-
-  items: [
-    // ═══ FACHADAS ═══
-    { id:1, type:'image', category:'fachadas', title:'Fachada Diurna', src:'assets/IMAGENS/Fachada Diurna.png', thumb:'assets/thumbs/IMAGENS/Fachada Diurna.jpg' },
-    { id:2, type:'image', category:'fachadas', title:'Fachada Noturna', src:'assets/IMAGENS/Fachada Noturna.png', thumb:'assets/thumbs/IMAGENS/Fachada Noturna.jpg' },
-    { id:3, type:'image', category:'fachadas', title:'Acesso Principal', src:'assets/IMAGENS/Scene 01.png', thumb:'assets/thumbs/IMAGENS/Scene 01.jpg' },
-    { id:4, type:'image', category:'fachadas', title:'Vista da Avenida', src:'assets/IMAGENS/Scene 02.png', thumb:'assets/thumbs/IMAGENS/Scene 02.jpg' },
-    { id:5, type:'image', category:'fachadas', title:'Acesso ao Entardecer', src:'assets/IMAGENS/Scene 03.png', thumb:'assets/thumbs/IMAGENS/Scene 03.jpg' },
-    { id:6, type:'image', category:'fachadas', title:'Vista Aérea do Condomínio', src:'assets/IMAGENS/Scene 43.png', thumb:'assets/thumbs/IMAGENS/Scene 43.jpg' },
-    { id:7, type:'image', category:'fachadas', title:'Comércio e Avenida', src:'assets/IMAGENS/Scene 3.png', thumb:'assets/thumbs/IMAGENS/Scene 3.jpg' },
-
-    // ═══ ÁREAS COMUNS ═══
-    { id:8, type:'image', category:'areas-comuns', title:'Piscina e Deck', src:'assets/IMAGENS/Scene 5.png', thumb:'assets/thumbs/IMAGENS/Scene 5.jpg' },
-    { id:9, type:'image', category:'areas-comuns', title:'Piscina', src:'assets/IMAGENS/Scene 6.png', thumb:'assets/thumbs/IMAGENS/Scene 6.jpg' },
-    { id:10, type:'image', category:'areas-comuns', title:'Pérgola', src:'assets/IMAGENS/Scene 8.png', thumb:'assets/thumbs/IMAGENS/Scene 8.jpg' },
-    { id:11, type:'image', category:'areas-comuns', title:'Praça Arborizada', src:'assets/IMAGENS/Scene 9.png', thumb:'assets/thumbs/IMAGENS/Scene 9.jpg' },
-    { id:12, type:'image', category:'areas-comuns', title:'Playground e Fitness ao Ar Livre', src:'assets/IMAGENS/Scene 10.png', thumb:'assets/thumbs/IMAGENS/Scene 10.jpg' },
-    { id:13, type:'image', category:'areas-comuns', title:'Praça com Gazebo', src:'assets/IMAGENS/Scene 11.png', thumb:'assets/thumbs/IMAGENS/Scene 11.jpg' },
-    { id:14, type:'image', category:'areas-comuns', title:'Eletroposto', src:'assets/IMAGENS/Scene 12.png', thumb:'assets/thumbs/IMAGENS/Scene 12.jpg' },
-    { id:15, type:'image', category:'areas-comuns', title:'Espaço Gourmet', src:'assets/IMAGENS/Scene 13.png', thumb:'assets/thumbs/IMAGENS/Scene 13.jpg' },
-    { id:16, type:'image', category:'areas-comuns', title:'Quadra de Vôlei de Areia', src:'assets/IMAGENS/Scene 14.png', thumb:'assets/thumbs/IMAGENS/Scene 14.jpg' },
-    { id:17, type:'image', category:'areas-comuns', title:'Gourmet e Pérgola', src:'assets/IMAGENS/Scene 15.png', thumb:'assets/thumbs/IMAGENS/Scene 15.jpg' },
-    { id:18, type:'image', category:'areas-comuns', title:'Quiosque com Deck', src:'assets/IMAGENS/Scene 16.png', thumb:'assets/thumbs/IMAGENS/Scene 16.jpg' },
-    { id:19, type:'image', category:'areas-comuns', title:'Academia (Fachada)', src:'assets/IMAGENS/Scene 17.png', thumb:'assets/thumbs/IMAGENS/Scene 17.jpg' },
-    { id:20, type:'image', category:'areas-comuns', title:'Portaria', src:'assets/IMAGENS/Scene 18.png', thumb:'assets/thumbs/IMAGENS/Scene 18.jpg' },
-    { id:21, type:'image', category:'areas-comuns', title:'Academia (Vista Externa)', src:'assets/IMAGENS/Scene 20.png', thumb:'assets/thumbs/IMAGENS/Scene 20.jpg' },
-    { id:22, type:'image', category:'areas-comuns', title:'Quadras e Estacionamento', src:'assets/IMAGENS/Scene 21.png', thumb:'assets/thumbs/IMAGENS/Scene 21.jpg' },
-    { id:23, type:'image', category:'areas-comuns', title:'Praça de Convivência', src:'assets/IMAGENS/Scene 22.png', thumb:'assets/thumbs/IMAGENS/Scene 22.jpg' },
-    { id:24, type:'image', category:'areas-comuns', title:'Mercado', src:'assets/IMAGENS/Scene 24.png', thumb:'assets/thumbs/IMAGENS/Scene 24.jpg' },
-    { id:25, type:'image', category:'areas-comuns', title:'Estacionamento e Torres', src:'assets/IMAGENS/Scene 25.png', thumb:'assets/thumbs/IMAGENS/Scene 25.jpg' },
-    { id:26, type:'image', category:'areas-comuns', title:'Alameda de Palmeiras', src:'assets/IMAGENS/Scene 26.png', thumb:'assets/thumbs/IMAGENS/Scene 26.jpg' },
-    { id:27, type:'image', category:'areas-comuns', title:'Piscina com Guarda-Sóis', src:'assets/IMAGENS/Scene 27.png', thumb:'assets/thumbs/IMAGENS/Scene 27.jpg' },
-    { id:28, type:'image', category:'areas-comuns', title:'Vista Aérea da Piscina', src:'assets/IMAGENS/Scene 29.png', thumb:'assets/thumbs/IMAGENS/Scene 29.jpg' },
-    { id:29, type:'image', category:'areas-comuns', title:'Torres', src:'assets/IMAGENS/Scene 30.png', thumb:'assets/thumbs/IMAGENS/Scene 30.jpg' },
-    { id:30, type:'image', category:'areas-comuns', title:'Torres e Paisagismo', src:'assets/IMAGENS/Scene 31.png', thumb:'assets/thumbs/IMAGENS/Scene 31.jpg' },
-    { id:31, type:'image', category:'areas-comuns', title:'Playground', src:'assets/IMAGENS/Scene 32.png', thumb:'assets/thumbs/IMAGENS/Scene 32.jpg' },
-    { id:32, type:'image', category:'areas-comuns', title:'Academia', src:'assets/IMAGENS/Scene 35.png', thumb:'assets/thumbs/IMAGENS/Scene 35.jpg' },
-    { id:33, type:'image', category:'areas-comuns', title:'Academia Funcional', src:'assets/IMAGENS/Scene 36.png', thumb:'assets/thumbs/IMAGENS/Scene 36.jpg' },
-    { id:34, type:'image', category:'areas-comuns', title:'Salão de Convivência', src:'assets/IMAGENS/Scene 37.png', thumb:'assets/thumbs/IMAGENS/Scene 37.jpg' },
-    { id:35, type:'image', category:'areas-comuns', title:'Lounge', src:'assets/IMAGENS/Scene 38.png', thumb:'assets/thumbs/IMAGENS/Scene 38.jpg' },
-
-    // ═══ APARTAMENTO DECORADO ═══
-    { id:36, type:'image', category:'apartamento', title:'Sala de Estar', src:'assets/PLANTAS/Living 01.png', thumb:'assets/thumbs/PLANTAS/Living 01.jpg' },
-    { id:37, type:'image', category:'apartamento', title:'Sala de Jantar', src:'assets/PLANTAS/Living 02.png', thumb:'assets/thumbs/PLANTAS/Living 02.jpg' },
-    { id:38, type:'image', category:'apartamento', title:'Cozinha', src:'assets/PLANTAS/Cozinha.png', thumb:'assets/thumbs/PLANTAS/Cozinha.jpg' },
-    { id:39, type:'image', category:'apartamento', title:'Quarto Infantil 01', src:'assets/PLANTAS/Quarto 01.png', thumb:'assets/thumbs/PLANTAS/Quarto 01.jpg' },
-    { id:40, type:'image', category:'apartamento', title:'Quarto Infantil 02', src:'assets/PLANTAS/Quarto 02.png', thumb:'assets/thumbs/PLANTAS/Quarto 02.jpg' },
-    { id:41, type:'image', category:'apartamento', title:'Suíte 01', src:'assets/PLANTAS/Suíte 01.png', thumb:'assets/thumbs/PLANTAS/Suíte 01.jpg' },
-    { id:42, type:'image', category:'apartamento', title:'Suíte 02', src:'assets/PLANTAS/Suíte 02.png', thumb:'assets/thumbs/PLANTAS/Suíte 02.jpg' },
-    { id:43, type:'image', category:'apartamento', title:'Banheiro', src:'assets/PLANTAS/Banheiro.png', thumb:'assets/thumbs/PLANTAS/Banheiro.jpg' },
-
-    // ═══ PLANTAS ═══
-    { id:44, type:'image', category:'plantas', subCategory:'pl-apartamentos', isPlant:true, title:'Planta Humanizada 01', src:'assets/PLANTAS/Planta Humanizada.png', thumb:'assets/thumbs/PLANTAS/Planta Humanizada.jpg' },
-    { id:45, type:'image', category:'plantas', subCategory:'pl-apartamentos', isPlant:true, title:'Planta Humanizada 02', src:'assets/PLANTAS/Planta Humanizada 02.png', thumb:'assets/thumbs/PLANTAS/Planta Humanizada 02.jpg' },
-    { id:46, type:'image', category:'plantas', subCategory:'pl-implantacao', isPlant:true, title:'Implantação', src:'assets/PLANTAS/Scene 43.png', thumb:'assets/thumbs/PLANTAS/Scene 43.jpg' },
-    { id:47, type:'image', category:'plantas', subCategory:'pl-implantacao', isPlant:true, title:'Implantação (Sem Fundo)', src:'assets/PLANTAS/Scene 43 SEM FUNDO.png', thumb:'assets/thumbs/PLANTAS/Scene 43 SEM FUNDO.jpg' },
+  folders: [
+    { id: 'fotomontagem', label: 'Fotomontagem', dir: 'Fotomontagem', files: [
+      ['Cópia de IMA-TERIVA_EUROVILLE-FOTOMONTAGEM-ALTA-R05', 'Fotomontagem'],
+    ]},
+    { id: 'clube', label: 'Clube', dir: 'Clube', files: [
+      ['Cópia de IMA-TERIVA_EUROVILLE-AEREA_CLUBE-ALTA',      'Vista Aérea do Clube'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-PISCINA_CAM01-ALTA',    'Piscina 01'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-PISCINA_CAM02-ALTA',    'Piscina 02'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-PISCINA_INTERNA-ALTA',  'Piscina Interna'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-BAR_PISCINA-ALTA',      'Bar da Piscina'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-PRAINHA-ALTA',          'Prainha'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-ACADEMIA-ALTA',         'Academia'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-BEACH_TENIS-ALTA',      'Beach Tennis'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-BRINQUEDOTECA-ALTA',    'Brinquedoteca'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-JOGOS-ALTA',            'Salão de Jogos'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-FESTAS_EXTERNO-ALTA',   'Festas Externo'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-FESTAS_INTERNO-ALTA',   'Festas Interno'],
+    ]},
+    { id: 'quadras', label: 'Quadras', dir: 'Quadras', files: [
+      ['Cópia de IMA-TERIVA_EUROVILLE-CAMPO_DE_FUTEBOL-ALTA-R02',  'Campo de Futebol'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-QUADRA_DE_TENIS-ALTA R01',   'Quadra de Tênis'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-QUADRA_POLIESPORTIVA-ALTA',  'Quadra Poliesportiva'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-GOURMET-ALTA R01',           'Espaço Gourmet'],
+    ]},
+    { id: 'praca', label: 'Praça', dir: 'Praça', files: [
+      ['Cópia de IMA-TERIVA_EUROVILLE-PRAÇA-ALTA',         'Praça'],
+      ['Cópia de IMA-TERIVA_EUROVILLE-PETPLACE-ALTA R01',  'Pet Place'],
+    ]},
+    { id: 'portaria', label: 'Portaria', dir: 'Portaria', files: [
+      ['Cópia de IMA-TERIVA_EUROVILLE-PORTARIA-ALTA',  'Portaria'],
+    ]},
   ],
 };
 
-// Versão otimizada p/ o lightbox (assets/large/*.jpg, ~2560px) — o PNG original pesa 10-20 MB
-GALLERY_CONFIG.items.forEach(it => {
-  if (it.src && !it.large) it.large = it.src.replace('assets/', 'assets/large/').replace(/\.[^./]+$/, '.jpg');
-});
+// Monta a lista plana de itens. thumb = grade (900px) · large = lightbox (2560px)
+GALLERY_CONFIG.items = [];
+GALLERY_CONFIG.folders.forEach(f => f.files.forEach(([name, title]) => {
+  GALLERY_CONFIG.items.push({
+    id: GALLERY_CONFIG.items.length + 1,
+    category: f.id,
+    subtitle: f.label,
+    title,
+    thumb: `assets/thumbs/imagens/${f.dir}/${name}.jpg`,
+    large: `assets/large/imagens/${f.dir}/${name}.jpg`,
+  });
+}));
 
 // ================================================================
 // ENGINE
 // ================================================================
 const st = {
-  cat:    'all',
-  sub:    null,
+  cat:    GALLERY_CONFIG.folders[0].id,
   lbItems: [],
   lbIdx:   -1,
-  lbDual:  false,
 };
 
 const $ = id => document.getElementById(id);
 
 const elFilterMain    = $('filter-main');
-const elFilterSub     = $('filter-sub');
-const elFilterSubIn   = $('filter-sub-inner');
 const elGrid          = $('g-grid');
 const elEmpty         = $('g-empty');
 const elLightbox      = $('lightbox');
 const elLbImg         = $('lb-img');
-const elLbDual        = $('lb-dual');
 const elLbTitle       = $('lb-title');
 const elLbSub         = $('lb-sub');
 const elLbCounter     = $('lb-counter');
@@ -1028,104 +709,34 @@ const elLbNotice      = $('lb-notice');
 const elLbPrev        = $('lb-prev');
 const elLbNext        = $('lb-next');
 
-// ── modo: 'imagens' | 'plantas' | 'all' ──────────────────────────
-const MODE = (() => {
-  try {
-    const m = new URLSearchParams(window.location.search).get('mode') || 'all';
-    return ['all','imagens','plantas'].includes(m) ? m : 'all';
-  } catch(_) { return 'all'; }
-})();
-
-// Categorias exibidas no filtro principal conforme modo
-const DISPLAY_CATS = (() => {
-  if (MODE === 'plantas') return GALLERY_CONFIG.categories.find(c => c.id === 'plantas').subs;
-  if (MODE === 'imagens') return GALLERY_CONFIG.categories.filter(c => c.id !== 'plantas');
-  return GALLERY_CONFIG.categories;
-})();
-
-// ── helpers ──────────────────────────────────────────────────────
-function getCat(id) { return GALLERY_CONFIG.categories.find(c => c.id === id); }
-function getSubLabel(catId, subId) {
-  const cat = getCat(catId);
-  if (!cat || !cat.subs) return '';
-  const s = cat.subs.find(s => s.id === subId);
-  return s ? s.label : '';
-}
-
 // ── filters ──────────────────────────────────────────────────────
-function renderMainFilters() {
+function renderFilters() {
   elFilterMain.innerHTML = '';
-  DISPLAY_CATS.forEach(cat => {
+  GALLERY_CONFIG.folders.forEach(f => {
     const b = document.createElement('button');
-    b.className = 'f-btn' + (cat.id === st.cat ? ' active' : '');
-    b.textContent = cat.label;
+    b.className = 'f-btn' + (f.id === st.cat ? ' active' : '');
+    b.textContent = f.label;
     b.addEventListener('click', () => {
-      if (cat.id === st.cat) return;
-      st.cat = cat.id;
-      // Se a categoria tem sub-filtros, pré-seleciona o primeiro
-      st.sub = (cat.subs && cat.subs.length) ? cat.subs[0].id : null;
-      renderMainFilters(); renderSubFilters(); renderGallery();
+      if (f.id === st.cat) return;
+      st.cat = f.id;
+      renderFilters(); renderGallery();
     });
     elFilterMain.appendChild(b);
   });
 }
 
-function renderSubFilters() {
-  // No modo plantas o filtro principal já é a tipologia — sem sub-filtro
-  if (MODE === 'plantas') { elFilterSub.classList.remove('open'); return; }
-  const cat = getCat(st.cat);
-  if (cat && cat.subs && cat.subs.length) {
-    elFilterSubIn.innerHTML = '';
-    const addSub = (id, label) => {
-      const b = document.createElement('button');
-      b.className = 'sf-btn' + (st.sub === id ? ' active' : '');
-      b.textContent = label;
-      b.addEventListener('click', () => {
-        if (st.sub === id) return;
-        st.sub = id;
-        renderSubFilters(); renderGallery();
-      });
-      elFilterSubIn.appendChild(b);
-    };
-    cat.subs.forEach(s => addSub(s.id, s.label));
-    elFilterSub.classList.add('open');
-  } else {
-    elFilterSub.classList.remove('open');
-  }
-}
-
 // ── gallery ──────────────────────────────────────────────────────
-function filteredItems() {
-  return GALLERY_CONFIG.items.filter(item => {
-    // Filtro de modo
-    if (MODE === 'plantas' && item.category !== 'plantas') return false;
-    if (MODE === 'imagens' && item.category === 'plantas') return false;
-
-    // Filtro de categoria
-    if (MODE === 'plantas') {
-      if (item.subCategory !== st.cat) return false;
-    } else {
-      if (st.cat && item.category !== st.cat) return false;
-      if (st.sub && item.subCategory !== st.sub) return false;
-    }
-    return true;
-  });
-}
-
 function renderGallery() {
-  const items = filteredItems();
+  const items = GALLERY_CONFIG.items.filter(item => item.category === st.cat);
   const existing = elGrid.querySelectorAll('.g-card');
 
   const doRender = () => {
     elGrid.innerHTML = '';
-    elGrid.classList.toggle('plantas-mode', MODE === 'plantas');
     elEmpty.classList.remove('show');
-    st.lbItems = items.filter(i => i.type === 'image');
+    st.lbItems = items;
     if (!items.length) { elEmpty.classList.add('show'); return; }
     items.forEach((item, i) => {
-      const card = item.type === 'cobertura-plan'
-        ? buildCobCard(item)
-        : buildImgCard(item);
+      const card = buildImgCard(item);
       card.style.animationDelay = Math.min(i * 0.04, 0.5) + 's';
       elGrid.appendChild(card);
     });
@@ -1148,10 +759,10 @@ function renderGallery() {
 
 function buildImgCard(item) {
   const card = document.createElement('div');
-  card.className = 'g-card' + (item.isPlant ? ' is-plant' : '');
+  card.className = 'g-card';
 
   const img = document.createElement('img');
-  img.src = item.thumb || item.src;
+  img.src = item.thumb;
   img.alt = item.title;
   img.loading = 'lazy';
   img.decoding = 'async';
@@ -1161,9 +772,7 @@ function buildImgCard(item) {
 
   const ov = document.createElement('div');
   ov.className = 'card-overlay';
-  ov.innerHTML = `<div class="card-title">${item.title}</div>` +
-    (item.subtitle ? `<div class="card-sub">${item.subtitle}</div>` :
-     item.subCategory ? `<div class="card-sub">${getSubLabel(item.category, item.subCategory)}</div>` : '');
+  ov.innerHTML = `<div class="card-title">${item.title}</div><div class="card-sub">${item.subtitle}</div>`;
 
   const zoom = document.createElement('div');
   zoom.className = 'card-zoom';
@@ -1176,187 +785,36 @@ function buildImgCard(item) {
   return card;
 }
 
-function buildCobCard(item) {
-  const card = document.createElement('div');
-  card.className = 'g-card cob-card';
-
-  // Header
-  const hdr = document.createElement('div');
-  hdr.className = 'cob-header';
-
-  const tg = document.createElement('div');
-  tg.innerHTML = `<div class="cob-badge">Planta</div>
-    <div class="cob-name">${item.title}</div>
-    ${item.area ? `<div class="cob-area">${item.area}</div>` : ''}
-    ${item.subtitle ? `<div class="cob-sub">${item.subtitle}</div>` : ''}`;
-
-  const tabs = document.createElement('div');
-  tabs.className = 'floor-tabs';
-
-  hdr.appendChild(tg);
-  hdr.appendChild(tabs);
-
-  // Body
-  const body = document.createElement('div');
-  body.className = 'cob-body';
-
-  // skeleton overlay for cob body
-  const skel = document.createElement('div');
-  skel.className = 'floor-skeleton';
-  body.appendChild(skel);
-
-  let loadedCount = 0;
-  item.floors.forEach((floor, fi) => {
-    // tab
-    const tab = document.createElement('button');
-    tab.className = 'floor-tab' + (fi === 0 ? ' active' : '');
-    tab.textContent = floor.label;
-    tab.addEventListener('click', () => {
-      tabs.querySelectorAll('.floor-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      body.querySelectorAll('.floor-wrap').forEach((w, wi) => w.classList.toggle('active', wi === fi));
-    });
-    tabs.appendChild(tab);
-
-    // image wrap
-    const wrap = document.createElement('div');
-    wrap.className = 'floor-wrap' + (fi === 0 ? ' active' : '');
-
-    const img = document.createElement('img');
-    img.src = floor.thumb || floor.src;
-    img.alt = floor.label;
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.addEventListener('click', () => openLbFloor(item, fi));
-    const onImgLoad = () => {
-      img.classList.add('loaded');
-      loadedCount++;
-      if (loadedCount >= item.floors.length) body.classList.add('loaded');
-    };
-    img.addEventListener('load', onImgLoad);
-    img.addEventListener('error', onImgLoad);
-    if (img.complete) onImgLoad();
-
-    const lbl = document.createElement('div');
-    lbl.className = 'floor-lbl';
-    lbl.textContent = floor.label;
-
-    wrap.appendChild(img);
-    wrap.appendChild(lbl);
-    body.appendChild(wrap);
-  });
-
-  // Footer — botão "ver ambas" (sobreposição) só faz sentido com 2 pisos;
-  // com mais pavimentos, as abas já alternam entre todos.
-  const foot = document.createElement('div');
-  foot.className = 'cob-footer';
-  if (item.floors.length === 2) {
-    const btn = document.createElement('button');
-    btn.className = 'btn-see-both';
-    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13">
-      <rect x="3" y="3" width="7" height="7" rx="1"/>
-      <rect x="14" y="3" width="7" height="7" rx="1"/>
-      <rect x="3" y="14" width="7" height="7" rx="1"/>
-      <rect x="14" y="14" width="7" height="7" rx="1"/>
-    </svg>${item.viewBothLabel || 'Ver ambas as variantes'}`;
-    btn.addEventListener('click', () => openLbDual(item));
-    foot.appendChild(btn);
-  } else {
-    const hint = document.createElement('span');
-    hint.className = 'cob-hint';
-    hint.textContent = item.floors.length + ' pavimentos — alterne nas abas · toque para ampliar';
-    foot.appendChild(hint);
-  }
-
-  card.appendChild(hdr);
-  card.appendChild(body);
-  card.appendChild(foot);
-  return card;
-}
-
 // ── lightbox ─────────────────────────────────────────────────────
-function showLb() {
-  elLightbox.classList.add('open');
-  document.addEventListener('keydown', onLbKey);
-}
-
 function openLb(item) {
   st.lbIdx = st.lbItems.findIndex(i => i.id === item.id);
-  st.lbDual = false;
-  elLbDual.classList.remove('show');
-  elLbImg.style.display = '';
-  elLbPrev.style.display = '';
-  elLbNext.style.display = '';
   updateLb();
-  showLb();
-}
-
-function openLbFloor(item, fi) {
-  st.lbDual = false;
-  elLbDual.classList.remove('show');
-  elLbImg.style.display = '';
-  elLbPrev.style.display = 'none';
-  elLbNext.style.display = 'none';
-  elLbImg.src = item.floors[fi].src;
-  elLbTitle.textContent = item.title;
-  elLbSub.textContent = item.floors[fi].label;
-  elLbCounter.textContent = '';
-  elLbNotice.textContent = 'As plantas pertencem à mesma unidade';
-  showLb();
-}
-
-function openLbDual(item) {
-  st.lbDual = true;
-  elLbImg.style.display = 'none';
-  elLbPrev.style.display = 'none';
-  elLbNext.style.display = 'none';
-  elLbDual.classList.add('show');
-
-  const dcA = $('dc-a'), dcB = $('dc-b');
-  dcA.querySelector('.dual-lbl').textContent = item.floors[0].label;
-  dcA.querySelector('img').src = item.floors[0].src;
-  dcB.querySelector('.dual-lbl').textContent = item.floors[1].label;
-  dcB.querySelector('img').src = item.floors[1].src;
-
-  elLbTitle.textContent = item.title;
-  elLbSub.textContent = item.area || '';
-  elLbCounter.textContent = item.area || '';
-  elLbNotice.textContent = 'Ambas as variantes pertencem à mesma unidade';
-  showLb();
+  elLightbox.classList.add('open');
+  document.addEventListener('keydown', onLbKey);
 }
 
 function closeLb() {
   elLightbox.classList.remove('open');
   document.removeEventListener('keydown', onLbKey);
   if (window._lbResetZoom) window._lbResetZoom();
-  setTimeout(() => {
-    elLbImg.style.display = '';
-    elLbPrev.style.display = '';
-    elLbNext.style.display = '';
-    elLbDual.classList.remove('show');
-  }, 300);
 }
 
 // Mostra a thumb (já em cache) na hora e troca pela versão large quando carregar
 function showLbSrc(item) {
-  const full = item.large || item.src;
-  if (!full) return;
+  const full = item.large;
   elLbImg.dataset.full = full;
   const pre = new Image();
-  const apply = () => { if (elLbImg.dataset.full === full) elLbImg.src = full; };
-  pre.onload = apply;
-  pre.onerror = () => { if (elLbImg.dataset.full === full && item.src && elLbImg.src.indexOf(item.src) < 0) elLbImg.src = item.src; };
+  pre.onload = () => { if (elLbImg.dataset.full === full) elLbImg.src = full; };
   pre.src = full;
-  if (!pre.complete && item.thumb) elLbImg.src = item.thumb;
+  if (!pre.complete) elLbImg.src = item.thumb;
 }
 
 const _lbPreloaded = {};
 function preloadLb(idx) {
   const it = st.lbItems[idx];
-  const u = it && (it.large || it.src);
-  if (!u || _lbPreloaded[u]) return;
-  _lbPreloaded[u] = new Image();
-  _lbPreloaded[u].src = u;
+  if (!it || _lbPreloaded[it.large]) return;
+  _lbPreloaded[it.large] = new Image();
+  _lbPreloaded[it.large].src = it.large;
 }
 
 function updateLb(dir) {
@@ -1365,7 +823,7 @@ function updateLb(dir) {
 
   // Textos/contador atualizam de imediato
   elLbTitle.textContent = item.title;
-  elLbSub.textContent = item.subtitle || (item.subCategory ? getSubLabel(item.category, item.subCategory) : '');
+  elLbSub.textContent = item.subtitle;
   elLbCounter.textContent = (st.lbIdx + 1) + ' / ' + st.lbItems.length;
   elLbNotice.textContent = '';
   elLbPrev.disabled = st.lbIdx === 0;
@@ -1395,7 +853,6 @@ function updateLb(dir) {
 }
 
 function navLb(dir) {
-  if (st.lbDual) return;
   const ni = st.lbIdx + dir;
   if (ni < 0 || ni >= st.lbItems.length) return;
   st.lbIdx = ni;
@@ -1418,18 +875,7 @@ function closeGallery() {
 
 // ── init ──────────────────────────────────────────────────────────
 function init() {
-  // Filtro inicial depende do modo
-  if (MODE === 'plantas') {
-    st.cat = DISPLAY_CATS[0].id;
-    st.sub = null;
-  } else {
-    st.cat = DISPLAY_CATS[0].id;               // 'areas-comuns'
-    const c0 = getCat(st.cat);
-    st.sub = (c0 && c0.subs && c0.subs.length) ? c0.subs[0].id : null;  // pré-seleciona 1ª sub
-  }
-
-  renderMainFilters();
-  renderSubFilters();
+  renderFilters();
   renderGallery();
 
   $('btn-close').addEventListener('click', closeGallery);
@@ -1502,7 +948,6 @@ function init() {
   let wheelRaf = null;
   body.addEventListener('wheel', e => {
     if (!document.getElementById('lightbox').classList.contains('open')) return;
-    if (document.getElementById('lb-dual').classList.contains('show')) return;
     e.preventDefault();
     const dz = e.deltaY < 0 ? 0.25 : -0.25;
     // cancelar transição durante scroll rápido para resposta imediata

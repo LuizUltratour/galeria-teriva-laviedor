@@ -1,21 +1,8 @@
 # Videos pesados — hospedados direto no S3, fora do git
 assets/videos/
 
-# Book de impressao (~153 MB) — material de referencia, nao versionar
-assets/BOOK-PRINT.pdf
-*.pdf
+# Imagens originais (~15 MB cada) — so no PC; no git/S3 ficam thumbs/ e large/
+assets/imagens/
 
 # Lixo do Windows Explorer
 Thumbs.db
-
-# Plantas originais (>100 MB cada) — so no S3; no git ficam thumbs/ e large/
-assets/PLANTAS HUMANIZADAS/**/*.png
-!assets/PLANTAS HUMANIZADAS/PAVIMENTOS/
-!assets/PLANTAS HUMANIZADAS/PAVIMENTOS/*.png
-assets/IMAGENS/*.png
-
-# Video 3D (~320 MB) — so no S3
-assets/VIDEO/
-
-# Panoramas 360 originais (~16 MB cada) — so no S3; no git ficam 360/web/ e thumbs/360/
-assets/360/*.png

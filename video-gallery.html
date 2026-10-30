@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galeria de Vídeos</title>
+  <title>Galeria de Vídeos — La Vie d'Or</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -11,15 +11,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* Grupo Impper — tema navy imersivo */
-      --bg:            #325825;
-      --surface:       #3E6330;
-      --surface-2:     #4A6E3B;
-      --dark:          #FFFFFF;
-      --border:        rgba(255,255,255,0.12);
-      --border-strong: rgba(255,255,255,0.28);
-      --accent:        #E57D43;
-      --accent-soft:   rgba(229,125,67,0.16);
+      /* La Vie d'Or — fundo marrom sólido #593B31 */
+      --bg:            #593B31;
+      --surface:       #6B493D;
+      --dark:          #F2EBDD;
+      --border:        rgba(242,235,221,0.12);
+      --border-strong: rgba(242,235,221,0.28);
+      --accent:        #F2EBDD;
+      --accent-ink:    #593B31;
+      --accent-soft:   rgba(242,235,221,0.14);
       --font-sans:     'Inter', system-ui, sans-serif;
       --ease:          cubic-bezier(0.4, 0, 0.2, 1);
       --spring:        cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -45,83 +45,26 @@
     #vg-header {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      padding: 10px 20px;
+      justify-content: space-between;
+      padding: 12px 24px;
       border-bottom: 1px solid var(--border);
       flex-shrink: 0;
       gap: 12px;
     }
+    #vg-logo { height: 48px; width: auto; display: block; }
 
-    /* ── TABS ── */
-    #vg-tabs {
-      display: flex;
-      gap: 4px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 3px;
-    }
-
-    .vg-tab {
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 6px 16px;
+    #btn-close, #vl-close {
+      width: 45px; height: 45px;
       border: none;
-      border-radius: 6px;
+      padding: 0;
       cursor: pointer;
-      background: transparent;
-      color: rgba(255,255,255,0.55);
-      transition: background 0.2s var(--ease), color 0.2s var(--ease);
-      white-space: nowrap;
-    }
-    .vg-tab:hover { color: #FFFFFF; }
-
-    .vg-tab.active {
-      background: var(--accent);
-      color: #FFFFFF;
-      box-shadow: 0 3px 12px rgba(229,125,67,0.35);
-    }
-
-    #btn-close {
-      width: 36px; height: 36px;
-      border: 1px solid var(--border-strong);
-      background: transparent;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 50%;
-      color: var(--dark);
-      transition: background 0.25s var(--ease), color 0.25s var(--ease);
+      background: url(assets/close-normal.png) center/100% 100% no-repeat;
       flex-shrink: 0;
     }
-    #btn-close:hover { background: var(--dark); color: var(--bg); border-color: var(--dark); }
+    #btn-close:active, #vl-close:active { background-image: url(assets/close-hover.png); }
+    @media (hover: hover) { #btn-close:hover, #vl-close:hover { background-image: url(assets/close-hover.png); } }
 
-    /* ── TAB PANELS ── */
-    .tab-panel {
-      display: none;
-      flex: 1;
-      min-height: 0;
-    }
-    .tab-panel.active { display: flex; flex-direction: column; }
-
-    /* ── HERO (institucional + conceito) ── */
-    #tab-institucional,
-    #tab-conceito {
-      background: #000;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-player {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      outline: none;
-    }
-
+    /* ── GRID ── */
     #vg-scroll {
       flex: 1;
       overflow-y: auto;
@@ -133,13 +76,14 @@
 
     #vg-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       padding: 14px;
     }
-    @media (max-width: 1100px) { #vg-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 700px)  { #vg-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 420px)  { #vg-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 1100px) { #vg-grid { grid-template-columns: repeat(2, 1fr); } }
+    /* mobile: vídeos verticais, 2 por linha */
+    #vg-grid.is-mobile { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 8px; }
+    @media (max-width: 380px) { #vg-grid.is-mobile { grid-template-columns: 1fr; } }
 
     /* ── VIDEO CARD ── */
     @keyframes cardIn {
@@ -152,29 +96,18 @@
       aspect-ratio: 16/9;
       overflow: hidden;
       cursor: pointer;
-      background: #1F3817;
-      border-radius: 14px;
+      background: var(--surface);
       border: 1px solid var(--border);
       box-shadow: 0 6px 20px rgba(0,0,0,0.28);
       animation: cardIn 0.55s var(--spring) both;
       transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
     }
+    #vg-grid.is-mobile .vg-card { aspect-ratio: 9/16; }
     .vg-card:hover {
       transform: translateY(-5px);
       border-color: var(--accent);
       box-shadow: 0 16px 38px rgba(0,0,0,0.42), 0 0 0 1px var(--accent-soft);
     }
-
-    /* placeholder gradient while thumb loads */
-    .vg-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #3E6330 0%, #1F3817 100%);
-      z-index: 0;
-      transition: opacity 0.4s ease;
-    }
-    .vg-card.thumb-ready::before { opacity: 0; pointer-events: none; }
 
     .vg-card video {
       width: 100%; height: 100%;
@@ -198,11 +131,11 @@
       width: 52px; height: 52px;
       border-radius: 50%;
       background: var(--accent);
-      color: #FFFFFF;
+      color: var(--accent-ink);
       display: flex; align-items: center; justify-content: center;
       transform: scale(0.85);
       transition: transform 0.3s var(--spring);
-      box-shadow: 0 6px 18px rgba(229,125,67,0.45);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
       flex-shrink: 0;
     }
     .vg-card:hover .vg-play-icon { transform: scale(1); }
@@ -212,8 +145,8 @@
       position: absolute;
       bottom: 0; left: 0; right: 0;
       padding: 28px 14px 13px;
-      background: linear-gradient(to top, rgba(20,14,9,0.92) 0%, rgba(20,14,9,0.45) 60%, transparent 100%);
-      color: #FFFFFF;
+      background: linear-gradient(to top, rgba(33,23,16,0.92) 0%, rgba(33,23,16,0.45) 60%, transparent 100%);
+      color: var(--dark);
     }
     .vg-card-title {
       font-size: 12.5px;
@@ -221,13 +154,6 @@
       letter-spacing: 0.02em;
       line-height: 1.3;
       text-shadow: 0 1px 6px rgba(0,0,0,0.8);
-    }
-    .vg-card-dur {
-      font-size: 9.5px;
-      font-weight: 400;
-      opacity: 0.7;
-      margin-top: 3px;
-      letter-spacing: 0.04em;
     }
 
     /* ── LIGHTBOX ── */
@@ -237,7 +163,7 @@
       z-index: 9000;
       display: flex;
       flex-direction: column;
-      background: rgba(20,14,9,0.98);
+      background: rgba(89,59,49,0.98);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
@@ -255,33 +181,21 @@
     #vl-title {
       font-size: 14px;
       font-weight: 600;
-      color: #FFFFFF;
+      color: var(--dark);
       letter-spacing: 0.02em;
     }
     #vl-counter {
       font-size: 10px;
-      color: rgba(255,255,255,0.35);
+      color: rgba(242,235,221,0.4);
       letter-spacing: 0.06em;
     }
-    #vl-close {
-      width: 38px; height: 38px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: transparent;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 50%;
-      color: #FFFFFF;
-      transition: background 0.22s, border-color 0.22s;
-      flex-shrink: 0;
-    }
-    #vl-close:hover { background: var(--accent); color: #FFFFFF; border-color: var(--accent); }
 
     #vl-body {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 8px 60px;
+      padding: 8px 80px;
       min-height: 0;
       position: relative;
     }
@@ -289,60 +203,43 @@
     #vl-player {
       max-width: 100%;
       max-height: 100%;
-      width: 100%;
+      background: #000;
       outline: none;
-      border-radius: 2px;
     }
 
     .vl-nav {
       position: absolute;
       top: 50%; transform: translateY(-50%);
-      width: 46px; height: 46px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: transparent;
+      width: 45px; height: 45px;
+      border: none;
+      padding: 0;
       cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 50%;
-      color: #FFFFFF;
-      transition: background 0.22s, border-color 0.22s;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
     }
-    .vl-nav:hover { background: var(--accent); border-color: var(--accent); }
+    #vl-prev { left: 16px; background-image: url(assets/voltar-normal.png); }
+    #vl-next { right: 16px; background-image: url(assets/proximo-normal.png); }
+    #vl-prev:active { background-image: url(assets/voltar-hover.png); }
+    #vl-next:active { background-image: url(assets/proximo-hover.png); }
+    @media (hover: hover) {
+      #vl-prev:hover { background-image: url(assets/voltar-hover.png); }
+      #vl-next:hover { background-image: url(assets/proximo-hover.png); }
+    }
     .vl-nav:disabled { opacity: 0.18; cursor: default; }
-    #vl-prev { left: 12px; }
-    #vl-next { right: 12px; }
 
-    #vl-foot {
-      padding: 10px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-shrink: 0;
-    }
-    #vl-hint {
-      font-size: 10px;
-      color: rgba(255,255,255,0.25);
-      letter-spacing: 0.06em;
-    }
+    #vl-foot { padding: 10px 28px; flex-shrink: 0; }
 
     /* ── MOBILE ── */
     @media (max-width: 600px) {
-      #vg-header {
-        flex-wrap: wrap;
-        padding: 10px 14px 8px;
-        row-gap: 8px;
-      }
-      #vg-title { order: 1; flex: 1; }
-      #btn-close { order: 2; }
-      #vg-tabs   { order: 3; width: 100%; justify-content: center; }
-      .vg-tab    { flex: 1; text-align: center; padding: 7px 8px; }
-
-      #vg-grid { gap: 2px; padding: 2px; }
+      #vg-header { padding: 10px 14px; }
+      #vg-logo { height: 36px; }
       #vl-head { padding: 12px 14px; }
       #vl-body { padding: 0; }
       #vl-prev { left: 8px; }
       #vl-next { right: 8px; }
       #vl-foot { padding: 8px 14px; }
-      .vl-nav  { width: 38px; height: 38px; background: rgba(20,14,9,0.6); border-color: transparent; }
     }
 
     /* ── ACESSIBILIDADE / DESEMPENHO ── */
@@ -356,38 +253,137 @@
       .vg-card { animation: none; filter: none; }
       .vg-card:hover { transform: none; }
     }
-  
-    #btn-close { border:none !important; border-radius:0 !important; width:45px !important; height:45px !important; background:url(assets/close-normal.png) center/100% 100% no-repeat !important; color:transparent; padding:0; backdrop-filter:none; -webkit-backdrop-filter:none; }
-    #btn-close:active { background-image:url(assets/close-hover.png) !important; }
-    @media (hover: hover) { #btn-close:hover { background:url(assets/close-hover.png) center/100% 100% no-repeat !important; border:none !important; border-radius:0 !important; width:45px !important; height:45px !important; } }
-
   </style>
 </head>
 <body>
 
 <div id="vg-root">
   <header id="vg-header">
+    <img id="vg-logo" src="assets/logo.png" alt="La Vie d'Or">
     <button id="btn-close" title="Fechar" aria-label="Fechar"></button>
   </header>
 
-  <!-- Tab: Institucional -->
-  <div id="tab-institucional" class="tab-panel active" role="tabpanel">
-    <video class="hero-player" data-tab="institucional"
-           src="assets/VIDEO/V%C3%8DDEO%203D%20-%20MIRANDA%20DE%20CASTRO%20-%20COM%20FRASES.mp4"
-           autoplay muted playsinline controls
-           preload="auto">
-    </video>
+  <div id="vg-scroll">
+    <div id="vg-grid"></div>
   </div>
+</div>
 
+<!-- Lightbox -->
+<div id="vg-lightbox" role="dialog" aria-modal="true">
+  <div id="vl-head">
+    <div id="vl-info">
+      <div id="vl-title"></div>
+      <div id="vl-counter"></div>
+    </div>
+    <button id="vl-close" aria-label="Fechar"></button>
+  </div>
+  <div id="vl-body">
+    <button id="vl-prev" class="vl-nav" aria-label="Anterior"></button>
+    <video id="vl-player" controls playsinline preload="metadata"></video>
+    <button id="vl-next" class="vl-nav" aria-label="Próximo"></button>
+  </div>
+  <div id="vl-foot"></div>
 </div>
 
 <script>
-const heroes = Array.from(document.querySelectorAll('.hero-player'));
-// ── fechar ──────────────────────────────────────────────────────
-document.getElementById('btn-close').addEventListener('click', closeGallery);
+// ================================================================
+// CONFIGURAÇÃO — vídeos de PC (assets/videos/) e de celular
+// (assets/videos/VERTICAIS/). Só a lista do dispositivo é carregada.
+// ================================================================
+const VIDEOS_PC = [
+  { title: 'Filme Conceito',               src: 'assets/videos/FILME CONCEITO 1.30s.mp4' },
+  { title: 'Filme Produto 15s',            src: 'assets/videos/FILME PRODUTO 15s.mp4' },
+  { title: 'Filme Produto 15s (Extendido)', src: 'assets/videos/FILME PRODUTO 15s (Extendido).mp4' },
+  { title: 'Filme Produto 30s',            src: 'assets/videos/FILME PRODUTO 30s.mp4' },
+  { title: 'Filme Produto 30s (Extendido)', src: 'assets/videos/FILME PRODUTO 30s (Extendido).mp4' },
+  { title: 'Filme TV 30s',                 src: 'assets/videos/FILME TV 30s.mp4' },
+];
 
+const VIDEOS_MOBILE = [
+  { title: 'Filme 15s — V1',        src: 'assets/videos/VERTICAIS/FILME 15s (Vertical) V1.mp4' },
+  { title: 'Filme 15s — V2',        src: 'assets/videos/VERTICAIS/FILME 15s (Vertical) V2.mp4' },
+  { title: 'Filme Produto 30s — V1', src: 'assets/videos/VERTICAIS/FILME PRODUTO 30s (Vertical) V1.mp4' },
+  { title: 'Filme Produto 30s — V2', src: 'assets/videos/VERTICAIS/FILME PRODUTO 30s (Vertical) V2.mp4' },
+  { title: 'Filme TV 30s',          src: 'assets/videos/VERTICAIS/FILME TV 30s (Vertical).mp4' },
+];
+
+const $ = id => document.getElementById(id);
+const elGrid     = $('vg-grid');
+const elLightbox = $('vg-lightbox');
+const elPlayer   = $('vl-player');
+const elPrev     = $('vl-prev');
+const elNext     = $('vl-next');
+
+// Celular = user agent móvel ou viewport estreito
+const mqNarrow = window.matchMedia('(max-width: 700px)');
+const isMobile = () => /Android.+Mobile|iPhone|iPod|Windows Phone/i.test(navigator.userAgent) || mqNarrow.matches;
+
+let list = [];
+let idx = -1;
+
+const url = v => encodeURI(v.src);
+
+function render() {
+  const mobile = isMobile();
+  list = mobile ? VIDEOS_MOBILE : VIDEOS_PC;
+  elGrid.classList.toggle('is-mobile', mobile);
+  elGrid.innerHTML = '';
+  list.forEach((v, i) => {
+    const card = document.createElement('div');
+    card.className = 'vg-card';
+    card.style.animationDelay = Math.min(i * 0.05, 0.4) + 's';
+    // #t=0.5 faz o navegador mostrar um quadro do vídeo como capa
+    card.innerHTML =
+      `<video src="${url(v)}#t=0.5" preload="metadata" muted playsinline></video>` +
+      `<div class="vg-play"><div class="vg-play-icon"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M8 5v14l11-7z"/></svg></div></div>` +
+      `<div class="vg-card-info"><div class="vg-card-title">${v.title}</div></div>`;
+    card.addEventListener('click', () => openLb(i));
+    elGrid.appendChild(card);
+  });
+}
+
+// ── lightbox ─────────────────────────────────────────────────────
+function openLb(i) {
+  idx = i;
+  play();
+  elLightbox.classList.add('open');
+  document.addEventListener('keydown', onKey);
+}
+
+function play() {
+  const v = list[idx];
+  $('vl-title').textContent = v.title;
+  $('vl-counter').textContent = (idx + 1) + ' / ' + list.length;
+  elPrev.disabled = idx === 0;
+  elNext.disabled = idx === list.length - 1;
+  elPlayer.src = url(v);
+  elPlayer.play().catch(() => {});
+}
+
+function closeLb() {
+  elLightbox.classList.remove('open');
+  document.removeEventListener('keydown', onKey);
+  elPlayer.pause();
+  elPlayer.removeAttribute('src');
+  elPlayer.load();
+}
+
+function nav(d) {
+  const n = idx + d;
+  if (n < 0 || n >= list.length) return;
+  idx = n;
+  play();
+}
+
+function onKey(e) {
+  if (e.key === 'Escape')     closeLb();
+  if (e.key === 'ArrowLeft')  nav(-1);
+  if (e.key === 'ArrowRight') nav(1);
+}
+
+// ── fechar ──────────────────────────────────────────────────────
 function closeGallery() {
-  heroes.forEach(v => v.pause());
+  elPlayer.pause();
   if (window.parent !== window) {
     window.parent.postMessage({ action: 'closeGallery' }, '*');
   } else if (window.history.length > 1) {
@@ -396,6 +392,22 @@ function closeGallery() {
     window.close();
   }
 }
+
+$('btn-close').addEventListener('click', closeGallery);
+$('vl-close').addEventListener('click', closeLb);
+elPrev.addEventListener('click', () => nav(-1));
+elNext.addEventListener('click', () => nav(1));
+
+// Troca de lista se o dispositivo/tamanho mudar (ex.: rotação)
+let lastMobile = isMobile();
+mqNarrow.addEventListener('change', () => {
+  if (isMobile() === lastMobile) return;
+  lastMobile = isMobile();
+  closeLb();
+  render();
+});
+
+render();
 </script>
 </body>
 </html>
